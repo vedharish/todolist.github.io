@@ -1,6 +1,6 @@
 var currentID;
 $(document).ready(function(){
-  currentID = 8;
+  currentID = 1;
   sortable();
 	$("#addToDo").keyup(function(event){
     if(event.keyCode == 13){
@@ -19,9 +19,9 @@ function addToDo(){
   todoAim = $('#addToDo').val();
   if(todoAim.length > 0){
     $('#addToDo').val("");
-    var elementString = "<div class='space'><div class='todoElement' id='todoElement";
+    var elementString = "<div class='space'><div class='todoElement panel' id='todoElement";
     elementString += currentID+"";
-    elementString += "'><h3 class='text'>";
+    elementString += "'><h3 class='text panel-body'>";
     elementString += todoAim;
     elementString += "</h3></div></div>";
     $(elementString).insertAfter($('#addToDo'));

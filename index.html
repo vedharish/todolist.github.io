@@ -3,6 +3,8 @@
   <head>
     <title>ToDo List</title>
     <link rel="stylesheet" href="css/design.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 
     <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
@@ -10,46 +12,23 @@
     <script type='text/javascript' src="js/responder.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container jumbotron">
       <h3 class="text">Todo List</h3>
-        <input class="todoElement" id="addToDo" type="text" placeholder="Add ToDo"></input>
+        <input class="todoElement breadcrumb" id="addToDo" type="text" placeholder="Add ToDo"></input>
         <div class='space'>
-          <div class='todoElement' id='todoElement1'>
-            <h3 class="text">A</h3>
-          </div>
-        </div>
-        <div class='space'>
-          <div class='todoElement' id='todoElement2'>
-            <h3 class="text">B</h3>
-          </div>
-        </div>
-        <div class='space'>
-          <div class='todoElement' id='todoElement3'>
-            <h3 class="text">D</h3>
-          </div>
-        </div>
-        <div class='space'>
-          <div class='todoElement completed' id='todoElement4'>
-            <h3 class="text">E</h3>
-          </div>
-        </div>
-        <div class='space'>
-          <div class='todoElement' id='todoElement5'>
-            <h3 class="text">F</h3>
-          </div>
-        </div>
-        <div class='space'>
-          <div class='todoElement' id='todoElement6'>
-            <h3 class="text">G</h3>
-          </div>
-        </div>
-        <div class='space'>
-          <div class='todoElement' id='todoElement7'>
-            <h3 class="text">H</h3>
+          <div class='todoElement panel completed' id='todoElement1'>
+            <h3 class="text panel-body">Sample Completed ToDo</h3>
           </div>
         </div>
         <br/>
-        <button class='clearButton'>Clear Completed</button>
+        <button class='clearButton btn btn-default'>Clear Completed</button>
     </div>
+
+    <br />
+    <blockquote>
+        <p>Double click a ToDo item to mark it complete or incomplete.</p>
+          <small>You can also <cite title="Source Title">Drag Drop</cite> ToDos according to priority of the ToDos</small>
+    </blockquote>
+
   </body>
 </html>
