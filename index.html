@@ -10,58 +10,46 @@
     <script type='text/javascript' src="js/responder.js"></script>
   </head>
   <body>
-    <div class='container'>
-      <h3 class='title' id='title0'>jQuery Nested Sortable</h3>
-      <ul class='space first-space' id='space0'>
-        <li class='route'>
-          <h3 class='title' id='title1'>A</h3>
-          <span class='ui-icon ui-icon-check'></span>
-          <ul class='space' id='space1'>
-          </ul>
-        </li>
-        <li class='route'>
-          <h3 class='title' id='title2'>B</h3>
-          <span class='ui-icon ui-icon-check'></span>
-          <ul class='space' id='space2'>
-            <li class='route'>
-              <h3 class='title' id='title3'>C</h3>
-              <span class='ui-icon ui-icon-check'></span>
-              <ul class='space' id='space3'>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class='route'>
-          <h3 class='title' id='title4'>D</h3>
-          <span class='ui-icon ui-icon-check'></span>
-          <ul class='space' id='space4'>
-          </ul>
-        </li>
-        <li class='route'>
-          <h3 class='title'>E</h3>
-          <span class='ui-icon ui-icon-check'></span>
-          <ul class='space'>
-          </ul>
-        </li>
-        <li class='route'>
-          <h3 class='title'>F</h3>
-          <span class='ui-icon ui-icon-check'></span>
-          <ul class='space'>
-          </ul>
-        </li>
-        <li class='route'>
-          <h3 class='title'>G</h3>
-          <span class='ui-icon ui-icon-check'></span>
-          <ul class='space'>
-          </ul>
-        </li>
-        <li class='route'>
-          <h3 class='title'>H</h3>
-          <span class='ui-icon ui-icon-check'></span>
-          <ul class='space'>
-          </ul>
-        </li>
-      </ul>
+    <div class="container">
+      <h3 class="text">Todo List</h3>
+        <input class="todoElement" id="addToDo" type="text" placeholder="Add ToDo"></input>
+        <div class='space'>
+          <div class='todoElement' id='todoElement1'>
+            <h3 class="text">A</h3>
+          </div>
+        </div>
+        <div class='space'>
+          <div class='todoElement' id='todoElement2'>
+            <h3 class="text">B</h3>
+          </div>
+        </div>
+        <div class='space'>
+          <div class='todoElement' id='todoElement3'>
+            <h3 class="text">D</h3>
+          </div>
+        </div>
+        <div class='space'>
+          <div class='todoElement completed' id='todoElement4'>
+            <h3 class="text">E</h3>
+          </div>
+        </div>
+        <div class='space'>
+          <div class='todoElement' id='todoElement5'>
+            <h3 class="text">F</h3>
+          </div>
+        </div>
+        <div class='space'>
+          <div class='todoElement' id='todoElement6'>
+            <h3 class="text">G</h3>
+          </div>
+        </div>
+        <div class='space'>
+          <div class='todoElement' id='todoElement7'>
+            <h3 class="text">H</h3>
+          </div>
+        </div>
+        <br/>
+        <button class='clearButton'>Clear Completed</button>
     </div>
   </body>
 </html>
