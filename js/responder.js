@@ -40,10 +40,16 @@ function appendToDo(currentID, todoAim, isCompleted){
 };
 
 function addToDo(){
-  todoAim = $('#addToDo').val();
-  incrementID();
-  appendToDo(getCurrentID(), todoAim, false);
-  storeToDo(getCurrentID(), false, todoAim);
+  todoAim = $('#addToDo').val().trim();
+  var isValid = /^([\w\ ]+)?$/.test(todoAim);
+  if(isValid){
+    incrementID();
+    appendToDo(getCurrentID(), todoAim, false);
+    storeToDo(getCurrentID(), false, todoAim);
+  }else{
+    alert('Invalid Input');
+    $('#addToDo').val("");
+  }
 };
 
 function sortable(){
