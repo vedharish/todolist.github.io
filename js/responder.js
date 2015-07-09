@@ -1,5 +1,6 @@
 var currentID;
 $(document).ready(function(){
+  $('.alert').hide();
   initializeTable();
   sortable();
 	$("#addToDo").keyup(function(event){
@@ -14,6 +15,9 @@ $(document).ready(function(){
         storeToDo(iter, true, "");
       }
     };
+  });
+  $('#closeButton').click(function(){
+    $('.alert').hide();
   });
 });
 
@@ -47,7 +51,7 @@ function addToDo(){
     appendToDo(getCurrentID(), todoAim, false);
     storeToDo(getCurrentID(), false, todoAim);
   }else{
-    alert('Invalid Input');
+    $('.alert').show();
     $('#addToDo').val("");
   }
 };
