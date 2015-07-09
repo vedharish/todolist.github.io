@@ -7,18 +7,19 @@ $(document).ready(function(){
       addToDo();
     }
   });
-  $('.todoElement').dblclick(function (){
-    $(this).toggleClass('completed');
-  });
   $('.clearButton').click(function (){
     $('.completed').remove();
+    for(var iter=1; iter<=getCurrentID(); iter++){
+      if(getToDo(iter)[1]){
+        storeToDo(iter, true, "");
+      }
+    };
   });
 });
 
-function appendToDo(todoAim, isCompleted){
+function appendToDo(currentID, todoAim, isCompleted){
   if(todoAim.length > 0){
     $('#addToDo').val("");
-    currentID = getCurrentID();
     var elementString = "";
     if(isCompleted){
       elementString += "<div class='space'><div class='todoElement panel completed' id='todoElement";
@@ -33,6 +34,7 @@ function appendToDo(todoAim, isCompleted){
     sortable();
     $('#todoElement'+currentID).dblclick(function (){
       $(this).toggleClass('completed');
+      storeToDo(currentID, $(this).is('.completed'), getToDo(currentID)[0]);
     });
   }
 };
@@ -40,7 +42,7 @@ function appendToDo(todoAim, isCompleted){
 function addToDo(){
   todoAim = $('#addToDo').val();
   incrementID();
-  appendToDo(todoAim, false);
+  appendToDo(getCurrentID(), todoAim, false);
   storeToDo(getCurrentID(), false, todoAim);
 };
 
@@ -82,13 +84,13 @@ function initializeTable(){
     for(var iter=1; iter<=currentID; iter++){
       var tempArray = getToDo(iter);
       if(tempArray[0] != ""){
-        appendToDo(tempArray[0], tempArray[1]);
+        appendToDo(iter, tempArray[0], tempArray[1]);
       }
     }
   }else{
     localStorage["todoList.currentID"] = 0;
     incrementID();
-    appendToDo("Sample Completed ToDo", true);
+    appendToDo(getCurrentID(), "Sample Completed ToDo", true);
     storeToDo(getCurrentID(), true, "Sample Completed ToDo");
   }
 };
