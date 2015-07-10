@@ -3,33 +3,46 @@ $(document).ready(function(){
   $('.alert').hide();
   initializeTable();
   sortable();
+
+  // Enter to Submit ToDo
 	$("#addToDo").keyup(function(event){
     if(event.keyCode == 13){
       addToDo();
     }
   });
+
+  // Call clearToDo for cleanup
   $('.clearButton').click(function (){
-    $('.completed').remove();
-    for(var iter=1; iter<=getCurrentID(); iter++){
-      if(getToDo(iter)[1]){
-        storeToDo(iter, true, "");
-        collect();
-      }
-    };
+    clearToDo();
   });
+
+  // Hide alert
   $('#closeButton').click(function(){
     $('.alert').hide();
   });
+
+  // Refill ToDos on refocusing tab
   $(window).focus(function(){
     $('.space').remove();
-    for(var iter=1; iter<=getCurrentID(); iter++){
-      var tempArray = getToDo(iter);
-      appendToDo(iter, tempArray[0], tempArray[1]);
-    };
+    showStoredToDos();
   });
 });
 
-function collect(){
+function initializeTable(){
+  // Show stored ToDos or add sample if first-time
+  if(getCurrentID()){
+    showStoredToDos();
+  }else{
+    resetLocalStorage();
+    incrementID();
+    appendToDo(getCurrentID(), "Sample Completed ToDo", true);
+    storeToDo(getCurrentID(), true, "Sample Completed ToDo");
+  }
+};
+
+function clearToDo(){
+  // get valid ToDos in a list, reset storage and then populate
+  // so as to get serial ids
   var currentID = getCurrentID();
   var finalToDoArray = [];
   for(var iter=1; iter<=currentID; iter++){
@@ -43,6 +56,19 @@ function collect(){
     appendToDo(getCurrentID(), finalToDoArray[iter]['todoText'], finalToDoArray[iter]['todoIsCompleted']);
     storeToDo(getCurrentID(), finalToDoArray[iter]['todoIsCompleted'], finalToDoArray[iter]['todoText']);
   };
+};
+
+function addToDo(){
+  todoAim = $('#addToDo').val().trim();
+  var isValid = /^([\-\,\.\w\ ]+)?$/.test(todoAim);
+  if(isValid){
+    incrementID();
+    appendToDo(getCurrentID(), todoAim, false);
+    storeToDo(getCurrentID(), false, todoAim);
+  }else{
+    $('.alert').show();
+    $('#addToDo').val("");
+  }
 };
 
 function appendToDo(currentID, todoAim, isCompleted){
@@ -62,16 +88,12 @@ function appendToDo(currentID, todoAim, isCompleted){
   }
 };
 
-function addToDo(){
-  todoAim = $('#addToDo').val().trim();
-  var isValid = /^([\-\,\.\w\ ]+)?$/.test(todoAim);
-  if(isValid){
-    incrementID();
-    appendToDo(getCurrentID(), todoAim, false);
-    storeToDo(getCurrentID(), false, todoAim);
-  }else{
-    $('.alert').show();
-    $('#addToDo').val("");
+function showStoredToDos(){
+  for(var iter=1; iter<=getCurrentID(); iter++){
+    var tempArray = getToDo(iter);
+    if(tempArray[0] != ""){
+      appendToDo(iter, tempArray[0], tempArray[1]);
+    }
   }
 };
 
@@ -83,16 +105,16 @@ function sortable(){
 	$('.space').disableSelection();
 };
 
-function storeToDo(todoID, isCompleted, text){
-  localStorage["todoList.todo."+todoID+".text"] = text;
-  localStorage["todoList.todo."+todoID+".isCompleted"] = isCompleted;
-};
-
 function getToDo(todoID){
   text = localStorage["todoList.todo."+todoID+".text"];
   isCompleted = localStorage["todoList.todo."+todoID+".isCompleted"];
   isCompleted = (isCompleted == 'true');
   return [text, isCompleted];
+};
+
+function storeToDo(todoID, isCompleted, text){
+  localStorage["todoList.todo."+todoID+".text"] = text;
+  localStorage["todoList.todo."+todoID+".isCompleted"] = isCompleted;
 };
 
 function getCurrentID(){
@@ -107,21 +129,4 @@ function resetLocalStorage(){
   localStorage.clear();
   localStorage["todoList.currentID"] = 0;
   $('.space').remove();
-};
-
-function initializeTable(){
-  var currentID = getCurrentID();
-  if(currentID){
-    for(var iter=1; iter<=currentID; iter++){
-      var tempArray = getToDo(iter);
-      if(tempArray[0] != ""){
-        appendToDo(iter, tempArray[0], tempArray[1]);
-      }
-    }
-  }else{
-    resetLocalStorage();
-    incrementID();
-    appendToDo(getCurrentID(), "Sample Completed ToDo", true);
-    storeToDo(getCurrentID(), true, "Sample Completed ToDo");
-  }
 };
