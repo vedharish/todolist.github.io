@@ -20,6 +20,13 @@ $(document).ready(function(){
   $('#closeButton').click(function(){
     $('.alert').hide();
   });
+  $(window).focus(function(){
+    $('.space').remove();
+    for(var iter=1; iter<=getCurrentID(); iter++){
+      var tempArray = getToDo(iter);
+      appendToDo(iter, tempArray[0], tempArray[1]);
+    };
+  });
 });
 
 function collect(){
