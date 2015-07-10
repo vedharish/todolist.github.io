@@ -1,4 +1,3 @@
-var currentID;
 $(document).ready(function(){
   $('.alert').hide();
   initializeTable();
