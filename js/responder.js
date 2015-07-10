@@ -28,7 +28,7 @@ function collect(){
   for(var iter=1; iter<=currentID; iter++){
     var tempArray = getToDo(iter);
     var tempDict = { 'todoID': iter, 'todoText': tempArray[0], 'todoIsCompleted': tempArray[1]};
-    if(tempArray[0] && tempArray[0].length > 1 && !tempArray[1]) finalToDoArray.push(tempDict);
+    if(tempArray[0] && tempArray[0].length > 0 && !tempArray[1]) finalToDoArray.push(tempDict);
   };
   resetLocalStorage();
   for(var iter=0; iter<finalToDoArray.length; iter++){
@@ -36,7 +36,6 @@ function collect(){
     appendToDo(getCurrentID(), finalToDoArray[iter]['todoText'], finalToDoArray[iter]['todoIsCompleted']);
     storeToDo(getCurrentID(), finalToDoArray[iter]['todoIsCompleted'], finalToDoArray[iter]['todoText']);
   };
-  alert(JSON.stringify(finalToDoArray));
 };
 
 function appendToDo(currentID, todoAim, isCompleted){
@@ -63,7 +62,7 @@ function appendToDo(currentID, todoAim, isCompleted){
 
 function addToDo(){
   todoAim = $('#addToDo').val().trim();
-  var isValid = /^([\w\ ]+)?$/.test(todoAim);
+  var isValid = /^([\-\,\.\w\ ]+)?$/.test(todoAim);
   if(isValid){
     incrementID();
     appendToDo(getCurrentID(), todoAim, false);
@@ -90,11 +89,7 @@ function storeToDo(todoID, isCompleted, text){
 function getToDo(todoID){
   text = localStorage["todoList.todo."+todoID+".text"];
   isCompleted = localStorage["todoList.todo."+todoID+".isCompleted"];
-  if(isCompleted == 'true'){
-    isCompleted = true;
-  }else{
-    isCompleted = false;
-  }
+  isCompleted = (isCompleted == 'true');
   return [text, isCompleted];
 };
 
