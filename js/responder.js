@@ -7,12 +7,14 @@ $(document).ready(function(){
 	$("#addToDo").keyup(function(event){
     if(event.keyCode == 13){
       addToDo();
+      setCompletionBar();
     }
   });
 
   // Call clearToDo for cleanup
   $('.clearButton').click(function (){
     clearToDo();
+    setCompletionBar();
   });
 
   // Hide alert
@@ -24,12 +26,23 @@ $(document).ready(function(){
   $(window).focus(function(){
     $('.space').remove();
     showStoredToDos();
+    setCompletionBar();
   });
+
+  setCompletionBar();
 });
+
+function setCompletionBar(){
+    var totElements = $('.space');
+    var completeElements = $('.completed');
+    var percent = 0;
+    if(totElements.length > 0) percent = completeElements.length/totElements.length*100;
+    $('.progress-bar').css('width', percent+'%');
+};
 
 function initializeTable(){
   // Show stored ToDos or add sample if first-time
-  if(getCurrentID()){
+  if(getCurrentID() || getCurrentID() == 0){
     showStoredToDos();
   }else{
     resetLocalStorage();
@@ -83,6 +96,7 @@ function appendToDo(currentID, todoAim, isCompleted){
     $('#todoElement'+currentID).dblclick(function (){
       $(this).toggleClass('completed');
       storeToDo(currentID, $(this).is('.completed'), getToDo(currentID)[0]);
+      setCompletionBar();
     });
   }
 };
