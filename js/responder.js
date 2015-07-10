@@ -48,17 +48,12 @@ function collect(){
 function appendToDo(currentID, todoAim, isCompleted){
   if(todoAim.length > 0){
     $('#addToDo').val("");
-    var elementString = "";
-    if(isCompleted){
-      elementString += "<div class='space'><div class='todoElement panel completed' id='todoElement";
-    }else{
-      elementString += "<div class='space'><div class='todoElement panel' id='todoElement";
-    }
-    elementString += currentID.toString();
-    elementString += "'><h3 class='text panel-body'>";
-    elementString += todoAim;
-    elementString += "</h3></div></div>";
-    $(elementString).insertAfter($('#addToDo'));
+    var spaceDiv = $('<div>').addClass('space');
+    var todoDiv = $('<div>').addClass('todoElement panel').attr('id', 'todoElement'+currentID.toString());
+    if(isCompleted) todoDiv.addClass('completed');
+    var h3Element = $('<h3>').addClass('text panel-body').append(todoAim);
+    spaceDiv.append(todoDiv.append(h3Element));
+    spaceDiv.insertAfter($('#addToDo'));
     sortable();
     $('#todoElement'+currentID).dblclick(function (){
       $(this).toggleClass('completed');
