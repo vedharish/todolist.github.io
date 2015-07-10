@@ -4,7 +4,7 @@ $(document).ready(function(){
   sortable();
 
   // Enter to Submit ToDo
-	$("#addToDo").keyup(function(event){
+  $("#addToDo").keyup(function(event){
     if(event.keyCode == 13){
       addToDo();
       setCompletionBar();
@@ -111,11 +111,11 @@ function showStoredToDos(){
 };
 
 function sortable(){
-	$('.space').sortable({
-		connectWith: '.space',
-		tolerance: 'intersect',
-	});
-	$('.space').disableSelection();
+  $('.space').sortable({
+    connectWith: '.space',
+    tolerance: 'intersect',
+  });
+  $('.space').disableSelection();
 };
 
 function getToDo(todoID){
